@@ -1,5 +1,10 @@
 package test;
 
+/*Questo è un servlet Java che gestisce la creazione di nuovi utenti.
+ le richieste POST nel pattern URL "/add" ed estrae il nome, il cognome,
+l'e-mail e la password dell'utente dai parametri della richiesta. Quindi inserisce un
+nuovo record nella tabella "utente" in un database MySQL utilizzando JDBC.*/
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -19,15 +24,17 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet(urlPatterns = "/addServlet")
+@WebServlet(urlPatterns = "/add")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection;
 
+//	Il servlet ha un metodo "init()" che inizializza una connessione al database.
+	
 	public void init(ServletConfig config) {
 		try {
 			ServletContext context = config.getServletContext();
-
+			
 			System.out.println("init()");
 
 			Enumeration<String> parameterNames = context.getInitParameterNames();
@@ -76,6 +83,8 @@ public class CreateUserServlet extends HttpServlet {
 		}
 
 	}
+//	Il servlet ha anche un metodo "destroy()" che chiude la connessione al database
+//	quando il servlet viene scaricato dal servlet container.
 
 	public void destroy() {
 		try {

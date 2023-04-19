@@ -1,5 +1,7 @@
 package test;
-
+//Questo è un servlet Java che gestisce l'accesso dell'utente. 
+//le richieste POST sul pattern URL "/login" e recupera il nome utente 
+//la password dai parametri della richiesta.
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -16,17 +18,21 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String name = request.getParameter("nomeutente");
+		System.out.println(name);
+		String password = request.getParameter("pw");
 
-		if ("admin".equals(username) && "password".equals(password)) {
+
+		if (name.equals("admin") && password.equals("password")) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("username", username);
+			session.setAttribute("username", name);
+			System.out.println("Access Done");
 
-			response.sendRedirect(request.getContextPath() + "/dashboard");
+			response.sendRedirect(request.getContextPath() + "/admin");
 		} else {
+			System.out.println("Access Failed");
 			request.setAttribute("errorMessage", "Invalid username or password");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 	}
 }

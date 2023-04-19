@@ -1,5 +1,8 @@
 package test;
-
+//Questo è un servlet Java che gestisce le richieste GET e POST a uno specifico
+//pattern URL ("/admin").
+//questo servlet consente agli amministratori di aggiungere nuovi utenti a un database
+//tramite un'interfaccia web.
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -23,7 +26,9 @@ public class AdminServlet extends HttpServlet {
 	private final String DB_URL = "jdbc:mysql://localhost:3306/test";
 	private final String USER = "root";
 	private final String PASS = "Admin123";
-
+//Il metodo doGet() viene chiamato quando una richiesta GET viene ricevuta dal servlet.
+//	Controlla se l'utente ha effettuato l'accesso come amministratore e, in tal caso,
+//	visualizza un modulo per aggiungere un nuovo utente
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -39,6 +44,9 @@ public class AdminServlet extends HttpServlet {
 		}
 		out.close();
 	}
+/*Il metodo doPost() viene chiamato quando una richiesta POST viene ricevuta dal servlet.
+Controlla se l'utente ha effettuato l'accesso come amministratore e, in tal caso,
+recupera i dati dell'utente dai parametri della richiesta e aggiunge un nuovo utente al database.*/	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
